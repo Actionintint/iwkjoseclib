@@ -12,8 +12,8 @@
     {
         get
         {
-            TValue v;
-            return TryGetValue(key, out v) ? v : base[key] = default(TValue);
+            TValue value;
+            return TryGetValue(key, out value) ? value : base[key] = default(TValue);
         }
         set
         {
