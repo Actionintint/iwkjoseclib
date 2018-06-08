@@ -1,11 +1,11 @@
-﻿class 関数ライブラリ
+﻿class Func
 {
     int GCD(int a, int b) => a % b == 0 ? b : GCD(b, a % b);
 
     int GCD(IEnumerable<int> a)
     {
         var res = a.First();
-        foreach (var item in a) res = GCD(item, res);
+        foreach (var i in a) res = GCD(i, res);
         return res;
     }
 
