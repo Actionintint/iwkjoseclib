@@ -1,4 +1,6 @@
-﻿class XorShift
+﻿using System;
+
+class XorShift
 {
     uint x = 123456789;
     uint y = 362436069;
