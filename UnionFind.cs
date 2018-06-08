@@ -1,6 +1,6 @@
 ﻿class UnionFind
 {
-    int[] buffer;
+    int[] parent;
 
     public UnionFind(int size)
     {
@@ -9,10 +9,10 @@
         {
             b[i] = i;
         }
-        buffer = b;
+        parent = b;
     }
 
-    int Root(int x) => buffer[x] == x ? x : buffer[x] = Root(buffer[x]);
+    int Root(int x) => parent[x] == x ? x : parent[x] = Root(parent[x]);
 
     public bool Same(int x, int y) => Root(x) == Root(y);
 
@@ -21,13 +21,13 @@
         x = Root(x);
         y = Root(y);
         if (x == y) return;
-        buffer[x] = y;
+        parent[x] = y;
     }
 }
 
 class UnionFind2
 {
-    int[] buffer;
+    int[] parent;
     int[] rank;
 
     public UnionFind2(int size)
@@ -37,11 +37,11 @@ class UnionFind2
         {
             b[i] = i;
         }
-        buffer = b;
+        parent = b;
         rank = new int[size];
     }
 
-    int Root(int x) => buffer[x] == x ? x : buffer[x] = Root(buffer[x]);
+    int Root(int x) => parent[x] == x ? x : parent[x] = Root(parent[x]);
 
     public bool Same(int x, int y) => Root(x) == Root(y);
 
@@ -52,11 +52,11 @@ class UnionFind2
         if (x == y) return;
         if (rank[x] < rank[y])
         {
-            buffer[x] = y;
+            parent[x] = y;
         }
         else
         {
-            buffer[y] = x;
+            parent[y] = x;
             if (rank[x] == rank[y]) rank[x]++;
         }
     }
@@ -64,7 +64,7 @@ class UnionFind2
 
 class MeguruUnionFind
 {
-    int[] buffer;
+    int[] parent;
     int count;
 
     public MeguruUnionFind(int size)
@@ -74,11 +74,11 @@ class MeguruUnionFind
         {
             b[i] = -1;
         }
-        buffer = b;
+        parent = b;
         count = size;
     }
 
-    int Root(int x) => buffer[x] < 0 ? x : buffer[x] = Root(buffer[x]);
+    int Root(int x) => parent[x] < 0 ? x : parent[x] = Root(parent[x]);
 
     public bool Same(int x, int y) => Root(x) == Root(y);
 
@@ -88,28 +88,28 @@ class MeguruUnionFind
         y = Root(y);
         if (x == y) return;
         count--;
-        if (buffer[x] > buffer[y])
+        if (parent[x] > parent[y])
         {
-            buffer[y] += buffer[x];
-            buffer[x] = y;
+            parent[y] += parent[x];
+            parent[x] = y;
         }
         else
         {
-            buffer[x] += buffer[y];
-            buffer[y] = x;
+            parent[x] += parent[y];
+            parent[y] = x;
         }
     }
 
-    public int Size(int x) => -buffer[Root(x)];
+    public int Size(int x) => -parent[Root(x)];
 
     public int Count() => count;
 }
 
-class WeightedUnionFind//kjc
+class WeightedUnionFind
 {
-    int[] buffer;
+    int[] parent;
     int[] rank;
-    int[] weight;
+    int[] weightDiff;
 
     public WeightedUnionFind(int size)
     {
@@ -118,40 +118,120 @@ class WeightedUnionFind//kjc
         {
             b[i] = i;
         }
-        buffer = b;
+        parent = b;
         rank = new int[size];
-        weight = new int[size];
+        weightDiff = new int[size];
     }
 
     int Root(int x)
     {
-        if (buffer[x] == x)
+        if (parent[x] == x)
         {
             return x;
         }
         else
         {
-            var r = Root(buffer[x]);
-            weight[x] += weight[buffer[x]];
-            return buffer[x] = r;
+            var r = Root(parent[x]);
+            weightDiff[x] += weightDiff[parent[x]];
+            return parent[x] = r;
         }
     }
 
+    int Weight(int x)
+    {
+        Root(x);
+        return weightDiff[x];
+    }
+
+    public int Diff(int x, int y) => Weight(y) - Weight(x);
+
     public bool Same(int x, int y) => Root(x) == Root(y);
 
-    public void Unite(int x, int y)
+    public void Unite(int x, int y, int w)
     {
+        w += Weight(x) - Weight(y);
         x = Root(x);
         y = Root(y);
         if (x == y) return;
         if (rank[x] < rank[y])
         {
-            buffer[x] = y;
+            parent[x] = y;
+            weightDiff[x] = -w;
         }
         else
         {
-            buffer[y] = x;
+            parent[y] = x;
+            weightDiff[y] = w;
+
             if (rank[x] == rank[y]) rank[x]++;
         }
     }
+}
+
+class WeightedMeguruUnionFind
+{
+    int[] parent;
+    int[] weightDiff;
+    int count;
+
+    public WeightedMeguruUnionFind(int size)
+    {
+        var b = new int[size];
+        for (int i = 0; i < b.Length; i++)
+        {
+            b[i] = -1;
+        }
+        parent = b;
+        weightDiff = new int[size];
+        count = size;
+    }
+
+    int Root(int x)
+    {
+        if (parent[x] < 0)
+        {
+            return x;
+        }
+        else
+        {
+            var r = Root(parent[x]);
+            weightDiff[x] += weightDiff[parent[x]];
+            return parent[x] = r;
+        }
+    }
+
+    int Weight(int x)
+    {
+        Root(x);
+        return weightDiff[x];
+    }
+
+    public int Diff(int x, int y) => Weight(y) - Weight(x);
+
+    public bool Same(int x, int y) => Root(x) == Root(y);
+
+    public void Unite(int x, int y, int w)
+    {
+        w += weightDiff[x] - weightDiff[y];
+        x = Root(x);
+        y = Root(y);
+        if (x == y) return;
+        count--;
+        if (parent[x] > parent[y])
+        {
+            parent[y] += parent[x];
+            parent[x] = y;
+            weightDiff[x] = -w;
+        }
+        else
+        {
+            parent[x] += parent[y];
+            parent[y] = x;
+            weightDiff[x] = w;
+        }
+    }
+
+    public int Size(int x) => -parent[Root(x)];
+
+    public int Count() => count;
 }
