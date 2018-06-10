@@ -227,7 +227,7 @@ class WeightedMeguruUnionFind
         {
             parent[x] += parent[y];
             parent[y] = x;
-            weightDiff[x] = w;
+            weightDiff[y] = w;
         }
     }
 
