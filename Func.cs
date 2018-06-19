@@ -1,7 +1,7 @@
 ﻿class Func
 {
     int GCD(int a, int b) => a % b == 0 ? b : GCD(b, a % b);
-
+    int LCM(int a, int b) => a / GCD(a, b) * b;
     int GCD(IEnumerable<int> a)
     {
         var res = a.First();
