@@ -1,4 +1,4 @@
-﻿class Map<TKey, TValue> : Dictionary<TKey, TValue>//Dicは存在しないキーでd[k]++するとエラー。Mapは存在しないキーd[k];すると勝手に要素が増える。
+﻿class Map<TKey, TValue> : Dictionary<TKey, TValue>
 {
     public Map() { }
     public Map(int capacity) : base(capacity) { }
@@ -13,7 +13,7 @@
         get
         {
             TValue value;
-            return TryGetValue(key, out value) ? value : base[key] = default(TValue);
+            return TryGetValue(key, out value) ? value : default(TValue);
         }
         set
         {
