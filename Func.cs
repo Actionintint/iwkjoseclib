@@ -38,7 +38,28 @@
         }
         return res;
     }
-
+    
+    int[,] MatrixMul(int[,] x, int[,] y)
+    {
+        var r = x.GetLength(0);
+        var c = y.GetLength(1);
+        var l = x.GetLength(1);
+        var m = new int[r, c];
+        for (int i = 0; i < r; i++)
+        {
+            for (int j = 0; j < c; j++)
+            {
+                var a = 0;
+                for (int k = 0; k < l; k++)
+                {
+                    a += x[i, k] * y[k, j];
+                }
+                m[i, j] = a;
+            }
+        }
+        return m;
+    }
+    
     long[] fac;
     long[] finv;
     long[] inv;
