@@ -127,42 +127,69 @@
 
         return res;
     }
-
-    int LowerBound(int[] a, int x)
+    
+    int BFS(List<int>[] graph, int start, Func<int, bool> find)
     {
-        var low = -1;
-        var high = a.Length;
-        while (high - low != 1)
+        var visited = new bool[graph.Length];
+        visited[start] = true;
+        var q = new Queue<int>();
+        q.Enqueue(start);
+
+        while (q.Count != 0)
         {
-            var mid = (low + high) / 2;
-            if (x <= a[mid])
+            var v = q.Dequeue();
+            if (find(v)) return v;
+            
+            foreach (var vertex in graph[v])
             {
-                high = mid;
+                if (!visited[vertex])
+                {
+                    visited[vertex] = true;
+                    q.Enqueue(vertex);
+                }
             }
-            else
-            {
-                low = mid;
-            }
+
         }
-        return high;
+        return -1;
     }
 
-    int MeguruBinarySearch(int[] a,int x)
+    int DFS(List<int>[] graph, int start, Func<int, bool> find)
     {
-        var ok = 0;
-        var ng = a.Length;
-        while (Math.Abs(ok-ng)!=1)
+        var visited = new bool[graph.Length];
+        visited[start] = true;
+        var q = new Stack<int>();
+        q.Push(start);
+
+        while (q.Count != 0)
         {
-            var mid = (ok + ng) / 2;
-            if(x<=a[mid])
+            var v = q.Pop();
+            if (find(v)) return v;
+
+            foreach (var vertex in graph[v])
             {
-                ok = mid;
+                if (!visited[vertex])
+                {
+                    visited[vertex] = true;
+                    q.Push(vertex);
+                }
             }
-            else
+
+        }
+        return -1;
+    }
+
+    int DFSrc(List<int>[] graph, int v, Func<int, bool> find, bool[] visited)
+    {
+        visited[v] = true;
+        if (find(v)) return v;
+        foreach (var vertex in graph[v])
+        {
+            if (!visited[vertex])
             {
-                ng = mid;
+                visited[vertex] = true;
+                return DFSrc(graph, vertex, find, visited);
             }
         }
-        return ok;
+        return -1;
     }
 }
