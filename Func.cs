@@ -127,4 +127,42 @@
 
         return res;
     }
+
+    int LowerBound(int[] a, int x)
+    {
+        var low = -1;
+        var high = a.Length;
+        while (high - low != 1)
+        {
+            var mid = (low + high) / 2;
+            if (x <= a[mid])
+            {
+                high = mid;
+            }
+            else
+            {
+                low = mid;
+            }
+        }
+        return high;
+    }
+
+    int MeguruBinarySearch(int[] a,int x)
+    {
+        var ok = 0;
+        var ng = a.Length;
+        while (Math.Abs(ok-ng)!=1)
+        {
+            var mid = (ok + ng) / 2;
+            if(x<=a[mid])
+            {
+                ok = mid;
+            }
+            else
+            {
+                ng = mid;
+            }
+        }
+        return ok;
+    }
 }
