@@ -129,4 +129,42 @@
 
         return res;
     }
+    
+    int[] orgSet;
+    int[] comSet;
+    int cp;
+    int varCom;
+    int[] max;
+    bool finished;
+
+    public void InitCombination(int n, int k)
+    {
+        orgSet = Enumerable.Range(0, n).ToArray();
+        comSet = Enumerable.Range(0, k).ToArray();
+        varCom = cp = k - 1;
+        max = Enumerable.Range(n - k, k).ToArray();
+        finished = false;
+    }
+
+    public void NextCombination()
+    {
+        if (finished) return;
+
+        if (comSet[0] >= max[0])
+        {
+            finished = true;
+            return;
+        }
+
+        if (comSet[cp] == max[cp])
+        {
+            while (comSet[cp] == max[cp]) cp--;
+            int Loc = comSet[cp];
+            if (comSet[cp] + 1 == max[cp]) comSet[cp] = ++Loc;
+            else for (int t = cp; t <= varCom; t++) comSet[t] = ++Loc;
+            cp = varCom;
+            return;
+        }
+        else comSet[cp]++;
+    }
 }
