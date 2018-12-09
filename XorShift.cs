@@ -1,13 +1,13 @@
 ﻿using System;
 
-class XorShift
+class Xorshift
 {
     uint x = 123456789;
     uint y = 362436069;
     uint z = 521288629;
     uint w = 88675123;
 
-    public XorShift()
+    public Xorshift()
     {
         var t = (uint)Environment.TickCount;
         x ^= t;
@@ -23,8 +23,8 @@ class XorShift
         var t = x ^ x << 11;
         x = y; y = z; z = w;
         t = w = w ^ w >> 19 ^ t ^ t >> 8;
-        if (t > int.MaxValue) t = ~t;
-        return (int)(t == int.MaxValue ? --t : t);
+        t &= int.MaxValue;
+        return t == int.MaxValue ? int.MaxValue - 1 : (int)t;
     }
 
     public int Next(int maxValue) => (int)(NextDouble() * maxValue);
