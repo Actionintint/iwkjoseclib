@@ -27,7 +27,7 @@ class Xorshift
         return t == int.MaxValue ? int.MaxValue - 1 : (int)t;
     }
 
-    public int Next(int maxValue) => (int)(NextDouble() * maxValue);
+    public int Next(int maxValue) => Next() % maxValue;
 
     public double NextDouble() => (double)Next() / int.MaxValue;
 }
