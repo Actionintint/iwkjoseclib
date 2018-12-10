@@ -28,6 +28,4 @@ class Xorshift
     }
 
     public int Next(int maxValue) => Next() % maxValue;
-
-    public double NextDouble() => (double)Next() / int.MaxValue;
 }
