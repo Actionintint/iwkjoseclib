@@ -18,14 +18,12 @@ class Xorshift
 
     uint Shift(uint u, int n) => u << n | u >> 32 - n;
 
-    public int Next()
+    uint Next()
     {
         var t = x ^ x << 11;
         x = y; y = z; z = w;
-        t = w = w ^ w >> 19 ^ t ^ t >> 8;
-        t &= int.MaxValue;
-        return t == int.MaxValue ? int.MaxValue - 1 : (int)t;
+        return w = w ^ w >> 19 ^ t ^ t >> 8;
     }
 
-    public int Next(int maxValue) => Next() % maxValue;
+    public int Next(int maxValue) => (int)(Next() % maxValue);
 }
