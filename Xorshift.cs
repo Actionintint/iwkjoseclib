@@ -77,7 +77,7 @@ public class Xorshift
     {
         for (int i = 0; i < buffer.Length; i++)
         {
-            buffer[i] = (byte)Next();
+            buffer[i] = (byte)Xorshift128();
         }
     }
 
@@ -86,7 +86,7 @@ public class Xorshift
     {
         for (int i = 0; i < buffer.Length; i++)
         {
-            buffer[i] = (byte)Next();
+            buffer[i] = (byte)Xorshift128();
         }
     }
 #endif
