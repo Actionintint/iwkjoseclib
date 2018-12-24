@@ -39,6 +39,18 @@
         return res;
     }
     
+    long Pow(double x, double y)
+    {
+        var res = 1.0;
+        while (y != 0)
+        {
+            if ((y & 1) != 0) res = res * x;
+            x = x * x;
+            y >>= 1;
+        }
+        return res;
+    }
+
     int[,] MatrixMul(int[,] x, int[,] y)
     {
         var r = x.GetLength(0);
@@ -89,24 +101,26 @@
         if (n < 0 || r < 0) return 0;
         return fac[n] * (finv[r] * finv[n - r] % mod) % mod;
     }
-    
-    int BitCount(int n)
+
+    public static int BitCount(int i)
     {
-        n = (n & 0x55555555) + (n >> 1 & 0x55555555);
-        n = (n & 0x33333333) + (n >> 2 & 0x33333333);
-        n = (n & 0x0f0f0f0f) + (n >> 4 & 0x0f0f0f0f);
-        n = (n & 0x00ff00ff) + (n >> 8 & 0x00ff00ff);
-        return (n & 0x0000ffff) + (n >> 16 & 0x0000ffff);
+        i = i - ((i >> 1) & 0x55555555);
+        i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
+        i = (i + (i >> 4)) & 0x0f0f0f0f;
+        i = i + (i >> 8);
+        i = i + (i >> 16);
+        return i & 0x3f;
     }
 
-    int BitCount(long n)
+    public static int BitCount(long i)
     {
-        n = (n & 0x5555555555555555) + (n >> 1 & 0x5555555555555555);
-        n = (n & 0x3333333333333333) + (n >> 2 & 0x3333333333333333);
-        n = (n & 0x0f0f0f0f0f0f0f0f) + (n >> 4 & 0x0f0f0f0f0f0f0f0f);
-        n = (n & 0x00ff00ff00ff00ff) + (n >> 8 & 0x00ff00ff00ff00ff);
-        n = (n & 0x0000ffff0000ffff) + (n >> 16 & 0x0000ffff0000ffff);
-        return (int)((n & 0x000000000000003f) + (n >> 32 & 0x000000000000003f));
+        i = i - ((i >> 1) & 0x5555555555555555L);
+        i = (i & 0x3333333333333333L) + ((i >> 2) & 0x3333333333333333L);
+        i = (i + (i >> 4)) & 0x0f0f0f0f0f0f0f0fL;
+        i = i + (i >> 8);
+        i = i + (i >> 16);
+        i = i + (i >> 32);
+        return (int)i & 0x7f;
     }
 
     double Differential(Func<double, double> f, double x)
