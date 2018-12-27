@@ -38,7 +38,7 @@
         }
         return res;
     }
-    
+
     int[,] MatrixMul(int[,] x, int[,] y)
     {
         var r = x.GetLength(0);
@@ -89,24 +89,26 @@
         if (n < 0 || r < 0) return 0;
         return fac[n] * (finv[r] * finv[n - r] % mod) % mod;
     }
-    
-    int BitCount(int n)
+
+    public static int BitCount(int i)
     {
-        n = (n & 0x55555555) + (n >> 1 & 0x55555555);
-        n = (n & 0x33333333) + (n >> 2 & 0x33333333);
-        n = (n & 0x0f0f0f0f) + (n >> 4 & 0x0f0f0f0f);
-        n = (n & 0x00ff00ff) + (n >> 8 & 0x00ff00ff);
-        return (n & 0x0000ffff) + (n >> 16 & 0x0000ffff);
+        i = i - ((i >> 1) & 0x55555555);
+        i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
+        i = (i + (i >> 4)) & 0x0f0f0f0f;
+        i = i + (i >> 8);
+        i = i + (i >> 16);
+        return i & 0x3f;
     }
 
-    int BitCount(long n)
+    public static int BitCount(long i)
     {
-        n = (n & 0x5555555555555555) + (n >> 1 & 0x5555555555555555);
-        n = (n & 0x3333333333333333) + (n >> 2 & 0x3333333333333333);
-        n = (n & 0x0f0f0f0f0f0f0f0f) + (n >> 4 & 0x0f0f0f0f0f0f0f0f);
-        n = (n & 0x00ff00ff00ff00ff) + (n >> 8 & 0x00ff00ff00ff00ff);
-        n = (n & 0x0000ffff0000ffff) + (n >> 16 & 0x0000ffff0000ffff);
-        return (int)((n & 0x000000000000003f) + (n >> 32 & 0x000000000000003f));
+        i = i - ((i >> 1) & 0x5555555555555555L);
+        i = (i & 0x3333333333333333L) + ((i >> 2) & 0x3333333333333333L);
+        i = (i + (i >> 4)) & 0x0f0f0f0f0f0f0f0fL;
+        i = i + (i >> 8);
+        i = i + (i >> 16);
+        i = i + (i >> 32);
+        return (int)i & 0x7f;
     }
 
     double Differential(Func<double, double> f, double x)
@@ -126,6 +128,44 @@
         }
 
         return res;
+    }
+    
+    int[] orgSet;
+    int[] comSet;
+    int cp;
+    int varCom;
+    int[] max;
+    bool finished;
+
+    public void InitCombination(int n, int k)
+    {
+        orgSet = Enumerable.Range(0, n).ToArray();
+        comSet = Enumerable.Range(0, k).ToArray();
+        varCom = cp = k - 1;
+        max = Enumerable.Range(n - k, k).ToArray();
+        finished = false;
+    }
+
+    public void NextCombination()
+    {
+        if (finished) return;
+
+        if (comSet[0] >= max[0])
+        {
+            finished = true;
+            return;
+        }
+
+        if (comSet[cp] == max[cp])
+        {
+            while (comSet[cp] == max[cp]) cp--;
+            int Loc = comSet[cp];
+            if (comSet[cp] + 1 == max[cp]) comSet[cp] = ++Loc;
+            else for (int t = cp; t <= varCom; t++) comSet[t] = ++Loc;
+            cp = varCom;
+            return;
+        }
+        else comSet[cp]++;
     }
     
     int BFS(List<int>[] graph, int start, Func<int, bool> find)
