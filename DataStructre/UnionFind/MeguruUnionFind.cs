@@ -1,9 +1,9 @@
-class MeguruUnionFind
+class UnionFind
 {
     int[] parent;
     int count;
 
-    public MeguruUnionFind(int size)
+    public UnionFind(int size)
     {
         var b = new int[size];
         for (int i = 0; i < b.Length; i++)
@@ -24,15 +24,15 @@ class MeguruUnionFind
         y = Root(y);
         if (x == y) return;
         count--;
-        if (parent[x] > parent[y])
-        {
-            parent[y] += parent[x];
-            parent[x] = y;
-        }
-        else
+        if (parent[x] < parent[y])
         {
             parent[x] += parent[y];
             parent[y] = x;
+        }
+        else
+        {
+            parent[y] += parent[x];
+            parent[x] = y;
         }
     }
 
