@@ -23,6 +23,13 @@ public class Xorshift
         uint Shift(uint u, int n) => u << n | u >> 32 - n;
     }
 
+    uint Xorshift128()
+    {
+        var t = x ^ x << 11;
+        x = y; y = z; z = w;
+        return w = w ^ w >> 19 ^ t ^ t >> 8;
+    }
+
     public int Next()
     {
         var t = x ^ x << 11;
@@ -32,16 +39,9 @@ public class Xorshift
         return t == int.MaxValue ? int.MaxValue - 1 : (int)t;
     }
 
-    public int Next(int minValue, int maxValue) => Next(maxValue - minValue) + minValue;
-
-    uint Xorshift128()
-    {
-        var t = x ^ x << 11;
-        x = y; y = z; z = w;
-        return w = w ^ w >> 19 ^ t ^ t >> 8;
-    }
-
     public int Next(int maxValue) => (int)(Xorshift128() % maxValue);
+
+    public int Next(int minValue, int maxValue) => Next(maxValue - minValue) + minValue;
 
     public double NextDouble() => Next() * (1.0 / int.MaxValue);
 
