@@ -1,4 +1,4 @@
-class UnionFind
+﻿class UnionFind
 {
     int[] parent;
     int count;

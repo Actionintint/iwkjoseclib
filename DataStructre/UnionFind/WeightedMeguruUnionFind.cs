@@ -1,4 +1,4 @@
-class WeightedMeguruUnionFind
+﻿class WeightedMeguruUnionFind
 {
     int[] parent;
     int[] weightDiff;

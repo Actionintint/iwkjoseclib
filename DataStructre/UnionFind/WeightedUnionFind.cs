@@ -1,4 +1,4 @@
-class WeightedUnionFind
+﻿class WeightedUnionFind
 {
     int[] parent;
     int[] rank;
