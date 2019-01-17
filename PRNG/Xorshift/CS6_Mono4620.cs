@@ -19,9 +19,9 @@ public class Xorshift
         y ^= Shift(t, 17);
         z ^= Shift(t, 31);
         w ^= Shift(t, 18);
-
-        uint Shift(uint u, int n) => u << n | u >> 32 - n;
     }
+
+    uint Shift(uint u, int n) => u << n | u >> 32 - n;
 
     uint Xorshift128()
     {
@@ -45,26 +45,12 @@ public class Xorshift
 
     public double NextDouble() => Next() * (1.0 / int.MaxValue);
 
-    public unsafe void NextBytes(Span<byte> buffer)
+    public void NextBytes(byte[] buffer)
     {
-        fixed (byte* p = buffer)
+        for (int i = 0; i < buffer.Length; i++)
         {
-            var last = p + buffer.Length;
-            var i = p;
-            while (i + 3 < last)
-            {
-                *(uint*)i = Xorshift128();
-                i += 4;
-            }
-            if (i + 1 < last)
-            {
-                *(ushort*)i = (ushort)Xorshift128();
-                i += 2;
-            }
-            if (i < last)
-            {
-                *i = (byte)Xorshift128();
-            }
+            buffer[i] = (byte)Xorshift128();
         }
     }
 }
+

@@ -14,9 +14,9 @@ class Xorshift
         y ^= Shift(t, 17);
         z ^= Shift(t, 31);
         w ^= Shift(t, 18);
-    }
 
-    uint Shift(uint u, int n) => u << n | u >> 32 - n;
+        uint Shift(uint u, int n) => u << n | u >> 32 - n;
+    }
 
     uint Next()
     {
