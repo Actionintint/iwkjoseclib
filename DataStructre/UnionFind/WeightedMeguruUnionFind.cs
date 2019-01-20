@@ -2,7 +2,7 @@
 {
     int[] parent;
     int[] weightDiff;
-    int count;
+    public int Count { get; private set; }
 
     public WeightedMeguruUnionFind(int size)
     {
@@ -46,7 +46,7 @@
         x = Root(x);
         y = Root(y);
         if (x == y) return;
-        count--;
+        Count--;
         if (parent[x] > parent[y])
         {
             parent[y] += parent[x];

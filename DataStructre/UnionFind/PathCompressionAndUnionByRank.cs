@@ -2,6 +2,7 @@
 {
     int[] parent;
     int[] rank;
+    public int Count { get; private set; }
 
     public UnionFind(int size)
     {
@@ -23,6 +24,7 @@
         x = Root(x);
         y = Root(y);
         if (x == y) return;
+        Count--;
         if (rank[x] < rank[y])
         {
             parent[x] = y;

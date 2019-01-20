@@ -1,6 +1,7 @@
 ﻿public class UnionFind
 {
     int[] parent;
+    public int Count { get; private set; }
 
     public UnionFind(int size)
     {
@@ -21,6 +22,7 @@
         x = Root(x);
         y = Root(y);
         if (x == y) return;
+        Count--;
         parent[x] = y;
     }
 }
