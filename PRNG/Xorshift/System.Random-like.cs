@@ -43,7 +43,7 @@ public class Xorshift
 
     public int Next(int minValue, int maxValue) => Next(maxValue - minValue) + minValue;
 
-    public double NextDouble() => Next() * (1.0 / int.MaxValue);
+    public double NextDouble() => Xorshift128() * (1.0 / ((double)uint.MaxValue + 1));
 
     public unsafe void NextBytes(Span<byte> buffer)
     {
