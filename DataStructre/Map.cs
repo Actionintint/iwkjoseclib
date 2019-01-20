@@ -1,6 +1,6 @@
-﻿public using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-class Map<TKey, TValue> : Dictionary<TKey, TValue>
+public class Map<TKey, TValue> : Dictionary<TKey, TValue>
 {
     public Map() { }
     public Map(int capacity) : base(capacity) { }
