@@ -1,6 +1,6 @@
 ﻿using System;
 
-class Xorshift
+public class Xorshift
 {
     uint x = 123456789;
     uint y = 362436069;

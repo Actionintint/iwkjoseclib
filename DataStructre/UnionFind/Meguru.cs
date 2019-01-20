@@ -1,7 +1,7 @@
-﻿class UnionFind
+﻿public class UnionFind
 {
     int[] parent;
-    int count;
+    public int Count { get; private set; }
 
     public UnionFind(int size)
     {
@@ -11,32 +11,30 @@
             b[i] = -1;
         }
         parent = b;
-        count = size;
+        Count = size;
     }
 
     int Root(int x) => parent[x] < 0 ? x : parent[x] = Root(parent[x]);
 
-    public bool Same(int x, int y) => Root(x) == Root(y);
+    public bool Some(int x, int y) => Root(x) == Root(y);
 
     public void Unite(int x, int y)
     {
         x = Root(x);
         y = Root(y);
         if (x == y) return;
-        count--;
+        Count--;
         if (parent[x] < parent[y])
-        {
-            parent[x] += parent[y];
-            parent[y] = x;
-        }
-        else
         {
             parent[y] += parent[x];
             parent[x] = y;
         }
+        else
+        {
+            parent[x] += parent[y];
+            parent[y] = x;
+        }
     }
 
     public int Size(int x) => -parent[Root(x)];
-
-    public int Count() => count;
 }
