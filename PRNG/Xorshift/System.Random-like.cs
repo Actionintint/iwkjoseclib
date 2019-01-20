@@ -34,9 +34,9 @@ public class Xorshift
     {
         var t = x ^ x << 11;
         x = y; y = z; z = w;
-        t = w = w ^ w >> 19 ^ t ^ t >> 8;
-        t &= int.MaxValue;
-        return t == int.MaxValue ? int.MaxValue - 1 : (int)t;
+        var k = w = w ^ w >> 19 ^ t ^ t >> 8;
+        k &= int.MaxValue;
+        return k == int.MaxValue ? int.MaxValue - 1 : (int)k;
     }
 
     public int Next(int maxValue) => (int)(Xorshift128() % maxValue);
