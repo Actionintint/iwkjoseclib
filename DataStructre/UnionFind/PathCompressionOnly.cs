@@ -1,4 +1,4 @@
-﻿class UnionFind
+﻿public class UnionFind
 {
     int[] parent;
 

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿public using System.Collections.Generic;
 
 class Map<TKey, TValue> : Dictionary<TKey, TValue>
 {
