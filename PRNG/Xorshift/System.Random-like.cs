@@ -39,7 +39,7 @@ public class Xorshift
         return k == int.MaxValue ? int.MaxValue - 1 : (int)k;
     }
 
-    public int Next(int maxValue) => (int)(Xorshift128() % maxValue);
+    public int Next(int maxValue) => (int)(Xorshift128() % (uint)maxValue);
 
     public int Next(int minValue, int maxValue) => Next(maxValue - minValue) + minValue;
 
