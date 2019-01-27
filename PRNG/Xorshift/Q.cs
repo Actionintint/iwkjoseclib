@@ -21,6 +21,11 @@ public class Xorshift
         w ^= Shift(t, 18);
 
         uint Shift(uint u, int n) => u << n | u >> 32 - n;
+
+        for (int i = 0; i < 40; i++)
+        {
+            Xorshift128();
+        }
     }
 
     uint Xorshift128()
@@ -67,4 +72,14 @@ public class Xorshift
             }
         }
     }
+
+    public int NextInt32() => (int)Xorshift128() & int.MaxValue;
+
+    public uint NextUInt32() => Xorshift128();
+
+    public long NextInt64() => (long)(Xorshift128() & int.MaxValue) << 32 | Xorshift128();
+
+    public ulong NextUInt64() => (ulong)Xorshift128() << 32 | Xorshift128();
+
+    public double NextDouble53() => ((ulong)Xorshift128() << 21 ^ Xorshift128()) * (1.0 / 9007199254740992.0);
 }

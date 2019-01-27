@@ -25,5 +25,5 @@ public class Xorshift
         return w = w ^ w >> 19 ^ t ^ t >> 8;
     }
 
-    public int Next(int maxValue) => (int)(Next() % maxValue);
+    public int Next(int maxValue) => (int)(Next() % (uint)maxValue);
 }
