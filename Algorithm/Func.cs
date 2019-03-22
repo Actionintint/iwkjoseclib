@@ -61,12 +61,12 @@
         }
         return m;
     }
-    
+
     long[] fac;
     long[] finv;
     long[] inv;
     const int mod = (int)1e9 + 7;
-    const int nMax = 5*(int)1e5;
+    const int nMax = 5 * (int)1e5;
 
     void InitC()
     {
@@ -92,27 +92,6 @@
         return fac[n] * (finv[r] * finv[n - r] % mod) % mod;
     }
 
-    public static int BitCount(int i)
-    {
-        i = i - ((i >> 1) & 0x55555555);
-        i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
-        i = (i + (i >> 4)) & 0x0f0f0f0f;
-        i = i + (i >> 8);
-        i = i + (i >> 16);
-        return i & 0x3f;
-    }
-
-    public static int BitCount(long i)
-    {
-        i = i - ((i >> 1) & 0x5555555555555555L);
-        i = (i & 0x3333333333333333L) + ((i >> 2) & 0x3333333333333333L);
-        i = (i + (i >> 4)) & 0x0f0f0f0f0f0f0f0fL;
-        i = i + (i >> 8);
-        i = i + (i >> 16);
-        i = i + (i >> 32);
-        return (int)i & 0x7f;
-    }
-
     double Differential(Func<double, double> f, double x)
     {
         return (f(x + 1.0 / 1000000) - f(x - 1.0 / 1000000)) / (1.0 / 500000);
@@ -131,7 +110,7 @@
 
         return res;
     }
-    
+
     int[] orgSet;
     int[] comSet;
     int cp;
@@ -169,7 +148,7 @@
         }
         else comSet[cp]++;
     }
-    
+
     int BFS(List<int>[] graph, int start, Func<int, bool> find)
     {
         var visited = new bool[graph.Length];
@@ -181,7 +160,7 @@
         {
             var v = q.Dequeue();
             if (find(v)) return v;
-            
+
             foreach (var vertex in graph[v])
             {
                 if (!visited[vertex])
