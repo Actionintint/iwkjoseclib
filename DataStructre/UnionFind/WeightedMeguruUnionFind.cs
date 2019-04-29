@@ -6,10 +6,10 @@
     public int Count => count;
     public WeightedMeguruUnionFind(int size)
     {
-        var b = new int[size];
-        for (int i = 0; i < b.Length; i++)
+        parent = new int[size];
+        for (int i = 0; i < parent.Length; i++)
         {
-            b[i] = -1;
+            parent[i] = -1;
         }
         parent = b;
         weightDiff = new int[size];
