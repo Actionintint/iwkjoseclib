@@ -26,13 +26,13 @@
         count--;
         if (parent[x] < parent[y])
         {
-            parent[y] += parent[x];
-            parent[x] = y;
+            parent[x] += parent[y];
+            parent[y] = x;
         }
         else
         {
-            parent[x] += parent[y];
-            parent[y] = x;
+            parent[y] += parent[x];
+            parent[x] = y;
         }
     }
 
