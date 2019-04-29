@@ -1,16 +1,17 @@
 ﻿public class UnionFind
 {
     int[] parent;
-    public int Count { get; private set; }
+    int count;
+    public int Count => count;
 
     public UnionFind(int size)
     {
-        var b = new int[size];
+        parent = new int[size];
         for (int i = 0; i < b.Length; i++)
         {
-            b[i] = i;
+            parent[i] = i;
         }
-        parent = b;
+        count = size;
     }
 
     int Root(int x) => parent[x] == x ? x : parent[x] = Root(parent[x]);
@@ -22,7 +23,7 @@
         x = Root(x);
         y = Root(y);
         if (x == y) return;
-        Count--;
+        count--;
         parent[x] = y;
     }
 }

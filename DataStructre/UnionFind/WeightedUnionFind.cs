@@ -3,18 +3,19 @@
     int[] parent;
     int[] rank;
     int[] weightDiff;
-    public int Count { get; private set; }
+    int count;
+    public int Count => count;
 
     public WeightedUnionFind(int size)
     {
-        var b = new int[size];
+        var parent = new int[size];
         for (int i = 0; i < b.Length; i++)
         {
-            b[i] = i;
+            parent[i] = i;
         }
-        parent = b;
         rank = new int[size];
         weightDiff = new int[size];
+        count = size;
     }
 
     int Root(int x)
@@ -47,7 +48,7 @@
         x = Root(x);
         y = Root(y);
         if (x == y) return;
-        Count--;
+        count--;
         if (rank[x] < rank[y])
         {
             parent[x] = y;

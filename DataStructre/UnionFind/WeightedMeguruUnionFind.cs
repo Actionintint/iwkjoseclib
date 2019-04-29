@@ -2,8 +2,8 @@
 {
     int[] parent;
     int[] weightDiff;
-    public int Count { get; private set; }
-
+    int count;
+    public int Count => count;
     public WeightedMeguruUnionFind(int size)
     {
         var b = new int[size];
@@ -46,7 +46,7 @@
         x = Root(x);
         y = Root(y);
         if (x == y) return;
-        Count--;
+        count--;
         if (parent[x] > parent[y])
         {
             parent[y] += parent[x];
@@ -62,6 +62,4 @@
     }
 
     public int Size(int x) => -parent[Root(x)];
-
-    public int Count() => count;
 }
