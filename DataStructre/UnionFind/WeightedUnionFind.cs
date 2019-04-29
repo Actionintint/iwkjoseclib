@@ -9,7 +9,7 @@
     public WeightedUnionFind(int size)
     {
         var parent = new int[size];
-        for (int i = 0; i < b.Length; i++)
+        for (int i = 0; i < parent.Length; i++)
         {
             parent[i] = i;
         }
