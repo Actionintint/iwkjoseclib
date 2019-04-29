@@ -9,14 +9,14 @@
         parent = new int[size];
         for (int i = 0; i < parent.Length; i++)
         {
-            parent[i] = i;
+            parent[i] = -1;
         }
         count = size;
     }
 
-    int Root(int x) => parent[x] == x ? x : parent[x] = Root(parent[x]);
+    int Root(int x) => parent[x] < 0 ? x : parent[x] = Root(parent[x]);
 
-    public bool Same(int x, int y) => Root(x) == Root(y);
+    public bool Some(int x, int y) => Root(x) == Root(y);
 
     public void Unite(int x, int y)
     {
@@ -24,6 +24,9 @@
         y = Root(y);
         if (x == y) return;
         count--;
+        parent[y] += parent[x];
         parent[x] = y;
     }
+
+    public int Size(int x) => -parent[Root(x)];
 }
