@@ -1,22 +1,14 @@
 ﻿class Func
 {
-    int GCD(int a, int b) => a % b == 0 ? b : GCD(b, a % b);
-    int LCM(int a, int b) => a / GCD(a, b) * b;
-    int GCD(IEnumerable<int> a)
+    public static int GCD(int a, int b)
     {
-        var res = a.First();
-        foreach (var i in a) res = GCD(i, res);
-        return res;
-    }
-
-    int GCD(params int[] a)
-    {
-        var res = a[0];
-        for (int i = 0; i < a.Length; i++)
+        while (b != 0)
         {
-            res = GCD(res, a[i]);
+            var c = a;
+            a = b;
+            b = c % b;
         }
-        return res;
+        return a;
     }
 
     public static bool IsPrime(int n)
