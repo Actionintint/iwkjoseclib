@@ -26,7 +26,7 @@
         var res = 1L;
         while (n != 0)
         {
-            if ((n & 1) != 0) res = res * x % m;
+            if ((n & 1) == 1) res = res * x % m;
             x = x * x % m;
             n >>= 1;
         }
