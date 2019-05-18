@@ -18,7 +18,7 @@ public class UnionFind
 
     int Root(int x) => parent[x] < 0 ? x : parent[x] = Root(parent[x]);
 
-    public bool Some(int x, int y) => Root(x) == Root(y);
+    public bool Same(int x, int y) => Root(x) == Root(y);
 
     public void Unite(int x, int y)
     {
