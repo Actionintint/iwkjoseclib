@@ -16,13 +16,13 @@ class Func
     public static bool IsPrime(int n)
     {
         if (n < 2) return false;
-        if (n % 2 == 0) return n == 2;
+        if ((n & 1) == 0) return n == 2;
         var r = (int)Math.Sqrt(n);
         for (int i = 3; i <= r; i += 2) if (n % i == 0) return false;
         return true;
     }
 
-    long Pow(long x, int n, int m = (int)1e9 + 7)
+    long ModPow(long x, int n, int m = (int)1e9 + 7)
     {
         var res = 1L;
         while (n != 0)
