@@ -1,7 +1,8 @@
-﻿public class UnionFind
+﻿using System;
+
+public class UnionFind
 {
     int[] parent;
-    int[] rank;
     int count;
     public int Count => count;
 
@@ -10,13 +11,12 @@
         parent = new int[size];
         for (int i = 0; i < parent.Length; i++)
         {
-            parent[i] = i;
+            parent[i] = -1;
         }
-        rank = new int[size];
         count = size;
     }
 
-    int Root(int x) => parent[x] == x ? x : parent[x] = Root(parent[x]);
+    int Root(int x) => parent[x] < 0 ? x : parent[x] = Root(parent[x]);
 
     public bool Same(int x, int y) => Root(x) == Root(y);
 
@@ -26,14 +26,14 @@
         y = Root(y);
         if (x == y) return;
         count--;
-        if (rank[x] < rank[y])
+        if (parent[x] > parent[y])
         {
             parent[x] = y;
         }
         else
         {
+            if (parent[x] == parent[y]) rank[x]--;
             parent[y] = x;
-            if (rank[x] == rank[y]) rank[x]++;
         }
     }
 }
