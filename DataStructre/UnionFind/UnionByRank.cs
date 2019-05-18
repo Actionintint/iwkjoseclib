@@ -32,7 +32,7 @@ public class UnionFind
         }
         else
         {
-            if (parent[x] == parent[y]) rank[x]--;
+            if (parent[x] == parent[y]) parent[x]--;
             parent[y] = x;
         }
     }
