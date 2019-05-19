@@ -1,10 +1,10 @@
-﻿public class WeightedMeguruUnionFind
+﻿public class WeightedUnionFind
 {
     int[] parent;
     int[] weightDiff;
     int count;
     public int Count => count;
-    public WeightedMeguruUnionFind(int size)
+    public WeightedUnionFind(int size)
     {
         parent = new int[size];
         for (int i = 0; i < parent.Length; i++)
