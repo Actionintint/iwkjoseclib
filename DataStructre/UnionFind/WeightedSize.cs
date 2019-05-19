@@ -11,7 +11,6 @@
         {
             parent[i] = -1;
         }
-        parent = b;
         weightDiff = new int[size];
         count = size;
     }
