@@ -1,4 +1,6 @@
-﻿public class WeightedUnionFind
+﻿using System;
+
+public class WeightedUnionFind
 {
     int[] parent;
     int[] weightDiff;

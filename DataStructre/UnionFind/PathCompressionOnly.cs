@@ -1,4 +1,6 @@
-﻿public class UnionFind
+﻿using System;
+
+public class UnionFind
 {
     int[] parent;
     int count;
