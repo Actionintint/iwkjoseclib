@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-static class BitArithmetic
+static class BitOperation//こんなんCore3.0で入るが
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int CountBits(int v)
