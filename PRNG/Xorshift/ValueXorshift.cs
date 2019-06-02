@@ -19,12 +19,12 @@ public struct ValueXorshift
         uint Shift(uint u, int n) => u << n | u >> 32 - n;
     }
 
-    public uint Next()
+    public uint Xorshift128()
     {
         var t = x ^ x << 11;
         x = y; y = z; z = w;
         return w = w ^ w >> 19 ^ t ^ t >> 8;
     }
 
-    public int Next(int maxValue) => (int)(Next() % (uint)maxValue);
+    public int Next(int maxValue) => (int)(Xorshift128() % (uint)maxValue);
 }
