@@ -1,13 +1,13 @@
 ﻿using System;
 
-class BinomialCoefficient
+class ModBinom
 {
     long[] fac;
     long[] finv;
     long[] inv;
     int mod;
 
-    public BinomialCoefficient(int N, int p = (int)1e9 + 7)// O(N)
+    public ModBinom(int N, int p = (int)1e9 + 7)//N < p  O(N)
     {
         N++;
 
