@@ -6,15 +6,15 @@ public class UnionFind
     int count;
     public int Count => count;
     public int Length => parent.Length;
-    
-    public UnionFind(int size)
+
+    public UnionFind(int length)
     {
-        parent = new int[size];
+        parent = new int[length];
         for (int i = 0; i < parent.Length; i++)
         {
             parent[i] = -1;
         }
-        count = size;
+        count = length;
     }
 
     int Root(int x) => parent[x] < 0 ? x : parent[x] = Root(parent[x]);

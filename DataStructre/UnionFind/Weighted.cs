@@ -6,15 +6,17 @@ public class WeightedUnionFind
     int[] weightDiff;
     int count;
     public int Count => count;
-    public WeightedUnionFind(int size)
+    public int Length =>parent.Length;
+
+    public WeightedUnionFind(int length)
     {
-        parent = new int[size];
+        parent = new int[length];
         for (int i = 0; i < parent.Length; i++)
         {
             parent[i] = -1;
         }
-        weightDiff = new int[size];
-        count = size;
+        weightDiff = new int[length];
+        count = length;
     }
 
     int Root(int x)
