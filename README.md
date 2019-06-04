@@ -1,3 +1,6 @@
 # iwkjoseclib
-~~C# 6.0以上~~Core2.2 C#7.3  
+
+Mono 4.6.2 C#6.0以下
+~~Core2.1 C#7.3以下 はやくこれになりたい~~
+
 `System.DataStructures`とか`System.Algorithm`とかあればいいのに
