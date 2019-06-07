@@ -5,7 +5,6 @@ public class UnionFind
     int[] parent;
     int count;
     public int Count => count;
-    public int Length => parent.Length;
 
     public UnionFind(int length)
     {
