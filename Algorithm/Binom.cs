@@ -18,7 +18,7 @@ class ModBinom
         inv[1] = 1;
         finv[0] = finv[1] = 1;
 
-        for (int i = 2; i < N; i++)
+        for (int i = 2; i < fac.Length; i++)
         {
             fac[i] = fac[i - 1] * i % p;
             inv[i] = p - inv[p % i] * (p / i) % p;
